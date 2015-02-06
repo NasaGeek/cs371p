@@ -1,0 +1,38 @@
+--
+CS371p: Quiz #7 (7 pts)
+--
+
+--------------------------------------------------------------------------
+ 1. What is the difference between a non-static inner class in Java and a
+    nested class in C++?
+    [Sec. 4.4, Pg. 91]
+    (1 pts)
+--
+
+the non-static inner class in Java is tied to an instance
+the nested class in C++ is not
+
+--------------------------------------------------------------------------
+ 2. What is a checked exception?
+    C++ has checked exceptions. True or False?
+    (1 pts)
+--
+
+an exception that must be caught or advertised as being thrown
+false
+
+--------------------------------------------------------------------------
+ 3. In C++, for the '<<=' operator that is defined on 'int', what is
+    the l-value / r-value nature of the return and the left argument?
+    (2 pts)
+--
+
+l-value, l-value
+
+--------------------------------------------------------------------------
+ 4. In Java, for the '<<=' operator that is defined on 'int', what is
+    the l-value / r-value nature of the return and the left argument?
+    (2 pts)
+--
+
+r-value, l-value
