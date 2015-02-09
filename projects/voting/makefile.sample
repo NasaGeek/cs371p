@@ -12,9 +12,6 @@ html: Doxyfile Voting.h Voting.c++ RunVoting.c++ TestVoting.c++
 RunVoting: Voting.h Voting.c++ RunVoting.c++
 	g++-4.7 -pedantic -std=c++11 -Wall Voting.c++ RunVoting.c++ -o RunVoting
 
-RunVoting.out: RunVoting RunVoting.in
-	RunVoting < RunVoting.in > RunVoting.out
-
 RunVoting.tmp: RunVoting RunVoting.in
 	RunVoting < RunVoting.in > RunVoting.tmp
 	diff RunVoting.tmp RunVoting.out
@@ -32,7 +29,6 @@ clean:
 	rm -f *.gcno
 	rm -f *.gcov
 	rm -f RunVoting
-	rm -f RunVoting.out
 	rm -f RunVoting.tmp
 	rm -f TestVoting
 	rm -f TestVoting.out
