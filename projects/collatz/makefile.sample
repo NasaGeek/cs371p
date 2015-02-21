@@ -6,9 +6,6 @@ Collatz.log:
 Doxyfile:
 	doxygen -g
 
-html: Doxyfile Collatz.h Collatz.c++ RunCollatz.c++ TestCollatz.c++
-	doxygen Doxyfile
-
 RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
 	g++-4.7 -pedantic -std=c++11 -Wall Collatz.c++ RunCollatz.c++ -o RunCollatz
 
@@ -24,6 +21,27 @@ TestCollatz.out: TestCollatz
 	gcov-4.7 -b Collatz.c++     >> TestCollatz.out
 	gcov-4.7 -b TestCollatz.c++ >> TestCollatz.out
 
+collatz-tests:
+	git clone https://github.com/cs371p-spring-2015/collatz-tests.git
+
+html: Doxyfile Collatz.h Collatz.c++ RunCollatz.c++ TestCollatz.c++
+	doxygen Doxyfile
+
+check:
+	@[ -d html                              ] && echo "html/                             found" || echo "html/                             NOT FOUND"
+	@[ -e collatz-tests/EID-RunCollatz.in   ] && echo "collatz-tests/EID-RunCollatz.in   found" || echo "collatz-tests/EID-RunCollatz.in   NOT FOUND"
+	@[ -e collatz-tests/EID-RunCollatz.out  ] && echo "collatz-tests/EID-RunCollatz.out  found" || echo "collatz-tests/EID-RunCollatz.out  NOT FOUND"
+	@[ -e collatz-tests/EID-TestCollatz.c++ ] && echo "collatz-tests/EID-TestCollatz.c++ found" || echo "collatz-tests/EID-TestCollatz.c++ NOT FOUND"
+	@[ -e collatz-tests/EID-TestCollatz.out ] && echo "collatz-tests/EID-TestCollatz.out found" || echo "collatz-tests/EID-TestCollatz.out NOT FOUND"
+	@[ -e Collatz.c++                       ] && echo "Collatz.c++                       found" || echo "Collatz.c++                       NOT FOUND"
+	@[ -e Collatz.h                         ] && echo "Collatz.h                         found" || echo "Collatz.h                         NOT FOUND"
+	@[ -e Doxyfile                          ] && echo "Doxyfile                          found" || echo "Doxyfile                          NOT FOUND"
+	@[ -e RunCollatz.c++                    ] && echo "RunCollatz.c++                    found" || echo "RunCollatz.c++                    NOT FOUND"
+	@[ -e RunCollatz.in                     ] && echo "RunCollatz.in                     found" || echo "RunCollatz.in                     NOT FOUND"
+	@[ -e RunCollatz.out                    ] && echo "RunCollatz.out                    found" || echo "RunCollatz.out                    NOT FOUND"
+	@[ -e TestCollatz.c++                   ] && echo "TestCollatz.c++                   found" || echo "TestCollatz.c++                   NOT FOUND"
+	@[ -e TestCollatz.out                   ] && echo "TestCollatz.out                   found" || echo "TestCollatz.out                   NOT FOUND"
+
 clean:
 	rm -f *.gcda
 	rm -f *.gcno
@@ -32,3 +50,6 @@ clean:
 	rm -f RunCollatz.tmp
 	rm -f TestCollatz
 	rm -f TestCollatz.out
+
+config:
+	git config -l

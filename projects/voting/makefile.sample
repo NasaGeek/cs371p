@@ -6,9 +6,6 @@ Voting.log:
 Doxyfile:
 	doxygen -g
 
-html: Doxyfile Voting.h Voting.c++ RunVoting.c++ TestVoting.c++
-	doxygen Doxyfile
-
 RunVoting: Voting.h Voting.c++ RunVoting.c++
 	g++-4.7 -pedantic -std=c++11 -Wall Voting.c++ RunVoting.c++ -o RunVoting
 
@@ -24,6 +21,27 @@ TestVoting.out: TestVoting
 	gcov-4.7 -b Voting.c++     >> TestVoting.out
 	gcov-4.7 -b TestVoting.c++ >> TestVoting.out
 
+html: Doxyfile Voting.h Voting.c++ RunVoting.c++ TestVoting.c++
+	doxygen Doxyfile
+
+voting-tests:
+	git clone https://github.com/cs371p-spring-2015/voting-tests.git
+
+check:
+	@[ -d html                            ] && echo "html/                           found" || echo "html/                           NOT FOUND"
+	@[ -e voting-tests/EID-RunVoting.in   ] && echo "voting-tests/EID-RunVoting.in   found" || echo "voting-tests/EID-RunVoting.in   NOT FOUND"
+	@[ -e voting-tests/EID-RunVoting.out  ] && echo "voting-tests/EID-RunVoting.out  found" || echo "voting-tests/EID-RunVoting.out  NOT FOUND"
+	@[ -e voting-tests/EID-TestVoting.c++ ] && echo "voting-tests/EID-TestVoting.c++ found" || echo "voting-tests/EID-TestVoting.c++ NOT FOUND"
+	@[ -e voting-tests/EID-TestVoting.out ] && echo "voting-tests/EID-TestVoting.out found" || echo "voting-tests/EID-TestVoting.out NOT FOUND"
+	@[ -e Voting.c++                      ] && echo "Voting.c++                      found" || echo "Voting.c++                      NOT FOUND"
+	@[ -e Voting.h                        ] && echo "Voting.h                        found" || echo "Voting.h                        NOT FOUND"
+	@[ -e Doxyfile                        ] && echo "Doxyfile                        found" || echo "Doxyfile                        NOT FOUND"
+	@[ -e RunVoting.c++                   ] && echo "RunVoting.c++                   found" || echo "RunVoting.c++                   NOT FOUND"
+	@[ -e RunVoting.in                    ] && echo "RunVoting.in                    found" || echo "RunVoting.in                    NOT FOUND"
+	@[ -e RunVoting.out                   ] && echo "RunVoting.out                   found" || echo "RunVoting.out                   NOT FOUND"
+	@[ -e TestVoting.c++                  ] && echo "TestVoting.c++                  found" || echo "TestVoting.c++                  NOT FOUND"
+	@[ -e TestVoting.out                  ] && echo "TestVoting.out                  found" || echo "TestVoting.out                  NOT FOUND"
+
 clean:
 	rm -f *.gcda
 	rm -f *.gcno
@@ -32,3 +50,6 @@ clean:
 	rm -f RunVoting.tmp
 	rm -f TestVoting
 	rm -f TestVoting.out
+
+config:
+	git config -l
