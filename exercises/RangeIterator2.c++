@@ -24,7 +24,7 @@ class range_iterator {
         bool operator != (const range_iterator& rhs) const {
             return !(*this == rhs);}
 
-        T operator * () {
+        T operator * () const {
             return _v;}
 
         range_iterator& operator ++ () {
