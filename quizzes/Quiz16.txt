@@ -1,0 +1,37 @@
+--
+CS371p: Quiz #16 (7 pts)
+--
+
+--------------------------------------------------------------------------
+ 1. What distinguishes refinement overriding from replacement overriding?
+    [Sec. 10.7, Pg. 217]
+    (2 pts)
+--
+
+the overriding method replaces the base version
+the overriding method runs in a addition to the base version
+
+--------------------------------------------------------------------------
+ 2. In range_iterator<T>::operator==(), what are the benefits of the
+    argument being const range_iterator& instead of range_iterator?
+    (2 pts)
+--
+
+protects the caller
+allows the caller to pass an r-value
+
+--------------------------------------------------------------------------
+ 3. In range_iterator<T>::operator++(), why is the return type
+    range_iterator&?
+    (1 pt)
+--
+
+want to be able to modify the return
+
+--------------------------------------------------------------------------
+ 4. In range_iterator<T>::operator++(int), why is the return type
+    range_iterator?
+    (1 pt)
+--
+
+want to NOT be able to modify the return
