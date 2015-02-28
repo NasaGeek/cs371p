@@ -31,7 +31,7 @@ class range_iterator {
             ++_v;
             return *this;}
 
-        range_iterator operator ++ (int) {
+        const range_iterator operator ++ (int) {
             range_iterator x = *this;
             ++*this;
             return x;}};

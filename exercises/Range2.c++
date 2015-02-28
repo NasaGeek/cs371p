@@ -37,7 +37,7 @@ class range {
                     ++_v;
                     return *this;}
 
-                iterator operator ++ (int) {
+                const iterator operator ++ (int) {
                     iterator x = *this;
                     ++*this;
                     return x;}};
@@ -47,17 +47,11 @@ class range {
                 _e (e)
             {}
 
-        iterator begin () {
+        const iterator begin () const {
             return iterator(_b);}
 
-        const iterator begin () const {
-            return const_cast<range<T>*>(this)->begin();}
-
-        iterator end () {
-            return iterator(_e);}
-
         const iterator end () const {
-            return const_cast<range<T>*>(this)->end();}};
+            return iterator(_e);}};
 
 int main () {
     using namespace std;
