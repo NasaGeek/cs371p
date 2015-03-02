@@ -2,14 +2,12 @@
 // Vector2.c++
 // -----------
 
-#include <cassert>   // assert
 #include <algorithm> // fill
+#include <cassert>   // assert
 #include <cstddef>   // size_t
 #include <iostream>  // cout, endl
 #include <iterator>  // ostream_iterator
 #include <sstream>   // ostringstream
-
-using namespace std;
 
 template <typename T>
 class my_vector {
@@ -24,7 +22,7 @@ class my_vector {
         my_vector (size_t s = 0, const T& v = T()) :
                 _a (s == 0 ? 0 : new T[s]),
                 _s (s) {
-            fill(_a, _a + _s, v);}
+            std::fill(_a, _a + _s, v);}
 
         ~my_vector () {
             delete [] _a;}

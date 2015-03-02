@@ -8,8 +8,6 @@
 #include <sstream>   // ostringstream
 #include <vector>    // vector
 
-using namespace std;
-
 int main () {
     using namespace std;
     cout << "Vector.c++" << endl;
