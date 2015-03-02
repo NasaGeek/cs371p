@@ -24,11 +24,11 @@ class Fraction {
                 _d (d)
             {}
 
-        bool operator == (const Fraction& other) const {
-            return (_n * other._d) == (_d * other._n);}
+        bool operator == (const Fraction& rhs) const {
+            return (_n * rhs._d) == (_d * rhs._n);}
 
-        Fraction operator * (const Fraction& other) const {
-            return Fraction(_n * other._n, _d * other._d);}};
+        const Fraction operator * (const Fraction& rhs) const {
+            return Fraction(_n * rhs._n, _d * rhs._d);}};
 
 int main () {
     Fraction<int> x(2, 3);
