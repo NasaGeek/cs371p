@@ -1,6 +1,6 @@
-// -------------
+// -----------
 // Vector3.c++
-// -------------
+// -----------
 
 #include <algorithm> // fill
 #include <cassert>   // assert
