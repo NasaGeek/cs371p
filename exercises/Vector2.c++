@@ -11,12 +11,9 @@
 
 template <typename T>
 class my_vector {
-    public:
-        typedef T value_type;
-
     private:
-        T*    const  _a;
-        const size_t _s;
+        T* const          _a;
+        const std::size_t _s;
 
     public:
         my_vector (size_t s = 0, const T& v = T()) :

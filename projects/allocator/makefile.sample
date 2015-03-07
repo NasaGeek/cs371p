@@ -20,13 +20,13 @@ html: Doxyfile Allocator.h TestAllocator.c++
 	doxygen Doxyfile
 
 check:
-	@[ -d html                                  ] && echo "html/                                 found" || echo "html/                             NOT FOUND"
+	@[ -d html                                  ] && echo "html/                                 found" || echo "html/                                 NOT FOUND"
 	@[ -e allocator-tests/EID-TestAllocator.c++ ] && echo "allocator-tests/EID-TestAllocator.c++ found" || echo "allocator-tests/EID-TestAllocator.c++ NOT FOUND"
 	@[ -e allocator-tests/EID-TestAllocator.out ] && echo "allocator-tests/EID-TestAllocator.out found" || echo "allocator-tests/EID-TestAllocator.out NOT FOUND"
-	@[ -e Allocator.h                           ] && echo "Allocator.h                           found" || echo "Allocator.h                         NOT FOUND"
-	@[ -e Doxyfile                              ] && echo "Doxyfile                              found" || echo "Doxyfile                          NOT FOUND"
-	@[ -e TestAllocator.c++                     ] && echo "TestAllocator.c++                     found" || echo "TestAllocator.c++                   NOT FOUND"
-	@[ -e TestAllocator.out                     ] && echo "TestAllocator.out                     found" || echo "TestAllocator.out                   NOT FOUND"
+	@[ -e Allocator.h                           ] && echo "Allocator.h                           found" || echo "Allocator.h                           NOT FOUND"
+	@[ -e Doxyfile                              ] && echo "Doxyfile                              found" || echo "Doxyfile                              NOT FOUND"
+	@[ -e TestAllocator.c++                     ] && echo "TestAllocator.c++                     found" || echo "TestAllocator.c++                     NOT FOUND"
+	@[ -e TestAllocator.out                     ] && echo "TestAllocator.out                     found" || echo "TestAllocator.out                     NOT FOUND"
 
 clean:
 	rm -f *.gcda

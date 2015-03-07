@@ -1,74 +1,55 @@
-// -----------
-// Vector2.c++
-// -----------
+// -------------
+// Vector3.c++
+// -------------
 
-#include <algorithm> // equal, fill, lexicographical_compare
+#include <algorithm> // fill
 #include <cassert>   // assert
 #include <cstddef>   // size_t
 #include <iostream>  // cout, endl
 #include <iterator>  // ostream_iterator
 #include <memory>    // allocator
 #include <sstream>   // ostringstream
-#include <stdexcept> // out_of_range
-#include <utility>   // !=, <=, >, >=
 
-#include "Memory.h"  // my_destroy, my_uninitialized_copy, my_uninitialized_fill
+template <typename A, typename BI>
+void my_destroy (A& a, BI b, BI e) {
+    while (b != e) {
+        --e;
+        a.destroy(&*e);}}
 
-/*
-namespace std     {
-namespace rel_ops {
-
-template <typename T>
-inline bool operator != (const T& lhs, const T& rhs) {
-    return !(lhs == rhs);}
-
-template <typename T>
-inline bool operator <= (const T& lhs, const T& rhs) {
-    return !(rhs < lhs);}
-
-template <typename T>
-inline bool operator > (const T& lhs, const T& rhs) {
-    return (rhs < lhs);}
-
-template <typename T>
-inline bool operator >= (const T& lhs, const T& rhs) {
-    return !(lhs < rhs);}
-
-} // rel_ops
-} // std;
-*/
+template <typename A, typename BI, typename U>
+void my_uninitialized_fill (A& a, BI b, BI e, const U& v) {
+    BI p = b;
+    try {
+        while (b != e) {
+            a.construct(&*b, v);
+            ++b;}}
+    catch (...) {
+        my_destroy(a, p, b);
+        throw;}}
 
 template <typename T, typename A = std::allocator<T> >
 class my_vector {
     private:
         A                 _x;
+        T* const          _a;
         const std::size_t _s;
-        T*    const       _a;
 
     public:
-        explicit my_vector (std::size_t s = 0, const T& v = T(), const A& x = A()) :
+        my_vector (std::size_t s = 0, const T& v = T(), const A& x = A()) :
                 _x (x),
-                _s (s),
-                _a (_x.allocate(s)) {
-            my_uninitialized_fill(_x, begin(), end(), v);}
+                _a (_x.allocate(s)),
+                _s (s) {
+            my_uninitialized_fill(_x, _a, _a + _s, v);}
 
         ~my_vector () {
-            my_destroy(_x, begin(), end());
-            _x.deallocate(begin(), _s);}
+            my_destroy(_x, _a, _a + _s);
+            _x.deallocate(_a, _s);}
 
-        T& operator [] (std::size_t i) {
+        T& operator [] (size_t i) {
             return _a[i];}
 
-        const T& operator [] (std::size_t i) const {
-            return (*const_cast<my_vector<T>*>(this))[i];}
-
-        T& at (std::size_t i) {
-            if (i >= size())
-                throw std::out_of_range("my_vector::at index out of range");
-            return (*this)[i];}
-
-        const T& at (std::size_t i) const {
-            return const_cast<my_vector<T>*>(this)->at(i);}
+        const T& operator [] (size_t i) const {
+            return _a[i];}
 
         T* begin () {
             return _a;}
@@ -84,14 +65,6 @@ class my_vector {
 
         std::size_t size () const {
             return _s;}};
-
-template <typename T>
-bool operator == (const my_vector<T>& lhs, const my_vector<T>& rhs) {
-    return (lhs.size() == rhs.size()) && std::equal(lhs.begin(), lhs.end(), rhs.begin());}
-
-template <typename T>
-bool operator < (const my_vector<T>& lhs, const my_vector<T>& rhs) {
-    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
 
 int main () {
     using namespace std;
