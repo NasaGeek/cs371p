@@ -1,5 +1,5 @@
 // -----------
-// Vector3.c++
+// Vector4.c++
 // -----------
 
 #include <algorithm> // copy, equal, fill
@@ -11,42 +11,48 @@
 template <typename T>
 class my_vector {
     private:
-        std::size_t _s;
         T*          _a;
+        std::size_t _s;
 
     public:
-        explicit my_vector (std::size_t s, const T& v = T()) :
-                _s (s),
-                _a (new T[_s]) {
+        my_vector (std::size_t s = 0, const T& v = T()) :
+                _a (s == 0 ? 0 : new T[s]),
+                _s (s) {
             std::fill(begin(), end(), v);}
 
-        my_vector (const my_vector& that) :
-            <your code>
+        my_vector (const my_vector& that) {
+            <your code>}
 
         my_vector& operator = (my_vector that) {
-            <your code>
+            <your code>}
 
         ~my_vector () {
             delete [] _a;}
+
+       T& operator [] (std::size_t i) {
+            return _a[i];}
+
+        const T& operator [] (std::size_t i) const {
+            return _a[i];}
 
         T* begin () {
             return _a;}
 
         const T* begin () const {
-            return _a;}
+            return const_cast<my_vector<T>*>(this)->begin();}
 
         T* end () {
             return _a + _s;}
 
         const T* end () const {
-            return _a + _s;}
+            return const_cast<my_vector<T>*>(this)->end();}
 
         std::size_t size () const {
             return _s;}};
 
 int main () {
     using namespace std;
-    cout << "Vector3.c++" << endl;
+    cout << "Vector4.c++" << endl;
 
     {
     const my_vector<int> x(10, 2);

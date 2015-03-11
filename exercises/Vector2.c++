@@ -16,18 +16,18 @@ class my_vector {
         const std::size_t _s;
 
     public:
-        my_vector (size_t s = 0, const T& v = T()) :
+        my_vector (std::size_t s = 0, const T& v = T()) :
                 _a (s == 0 ? 0 : new T[s]),
                 _s (s) {
-            std::fill(_a, _a + _s, v);}
+            std::fill(begin(), end(), v);}
 
         ~my_vector () {
             delete [] _a;}
 
-        T& operator [] (size_t i) {
+        T& operator [] (std::size_t i) {
             return _a[i];}
 
-        const T& operator [] (size_t i) const {
+        const T& operator [] (std::size_t i) const {
             return _a[i];}
 
         T* begin () {

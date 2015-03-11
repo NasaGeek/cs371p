@@ -11,39 +11,45 @@
 template <typename T>
 class my_vector {
     private:
-        std::size_t _s;
         T*          _a;
+        std::size_t _s;
 
     public:
-        explicit my_vector (std::size_t s, const T& v = T()) :
-                _s (s),
-                _a (new T[_s]) {
+        my_vector (std::size_t s = 0, const T& v = T()) :
+                _a (s == 0 ? 0 : new T[s]),
+                _s (s) {
             std::fill(begin(), end(), v);}
 
         my_vector (const my_vector& that) :
-                _s (that._s),
-                _a (new T[_s]) {
+                _a (new T[that._s]),
+                _s (that._s) {
             std::copy(that.begin(), that.end(), begin());}
 
         my_vector& operator = (my_vector that) {
-            std::swap(_s, that._s);
             std::swap(_a, that._a);
+            std::swap(_s, that._s);
             return *this;}
 
         ~my_vector () {
             delete [] _a;}
 
+       T& operator [] (std::size_t i) {
+            return _a[i];}
+
+        const T& operator [] (std::size_t i) const {
+            return _a[i];}
+
         T* begin () {
             return _a;}
 
         const T* begin () const {
-            return _a;}
+            return const_cast<my_vector<T>*>(this)->begin();}
 
         T* end () {
             return _a + _s;}
 
         const T* end () const {
-            return _a + _s;}
+            return const_cast<my_vector<T>*>(this)->end();}
 
         std::size_t size () const {
             return _s;}};
