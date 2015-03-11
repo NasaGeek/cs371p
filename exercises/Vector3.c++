@@ -1,5 +1,5 @@
 // -----------
-// Vector4.c++
+// Vector3.c++
 // -----------
 
 #include <algorithm> // copy, equal, fill
@@ -52,7 +52,7 @@ class my_vector {
 
 int main () {
     using namespace std;
-    cout << "Vector4.c++" << endl;
+    cout << "Vector3.c++" << endl;
 
     {
     const my_vector<int> x(10, 2);
