@@ -1,8 +1,8 @@
 // -----------
-// Vector3.c++
+// Vector4.c++
 // -----------
 
-#include <algorithm> // copy, equal, fill
+#include <algorithm> // copy, equal, fill, swap
 #include <cassert>   // assert
 #include <cstddef>   // size_t
 #include <iostream>  // cout, endl
@@ -21,10 +21,14 @@ class my_vector {
             std::fill(begin(), end(), v);}
 
         my_vector (const my_vector& that) :
-            <your code>
+                _s (that._s),
+                _a (new T[_s]) {
+            std::copy(that.begin(), that.end(), begin());}
 
         my_vector& operator = (my_vector that) {
-            <your code>
+            std::swap(_s, that._s);
+            std::swap(_a, that._a);
+            return *this;}
 
         ~my_vector () {
             delete [] _a;}
@@ -46,7 +50,7 @@ class my_vector {
 
 int main () {
     using namespace std;
-    cout << "Vector3.c++" << endl;
+    cout << "Vector4.c++" << endl;
 
     {
     const my_vector<int> x(10, 2);
