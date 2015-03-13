@@ -17,8 +17,7 @@ the overriding method runs in a addition to the base version
     (2 pts)
 --
 
-protects the caller
-allows the caller to pass an r-value
+less space and time
 
 --------------------------------------------------------------------------
  3. In range_iterator<T>::operator++(), why is the return type
