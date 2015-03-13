@@ -20,10 +20,10 @@ class my_vector {
                 _s (s) {
             std::fill(begin(), end(), v);}
 
-        my_vector (const my_vector& that) {
+        my_vector (const my_vector& rhs) {
             <your code>}
 
-        my_vector& operator = (my_vector that) {
+        my_vector& operator = (my_vector rhs) {
             <your code>}
 
         ~my_vector () {

@@ -20,14 +20,14 @@ class my_vector {
                 _s (s) {
             std::fill(begin(), end(), v);}
 
-        my_vector (const my_vector& that) :
-                _a (new T[that._s]),
-                _s (that._s) {
-            std::copy(that.begin(), that.end(), begin());}
+        my_vector (const my_vector& rhs) :
+                _a (new T[rhs._s]),
+                _s (rhs._s) {
+            std::copy(rhs.begin(), rhs.end(), begin());}
 
-        my_vector& operator = (my_vector that) {
-            std::swap(_a, that._a);
-            std::swap(_s, that._s);
+        my_vector& operator = (my_vector rhs) {
+            std::swap(_a, rhs._a);
+            std::swap(_s, rhs._s);
             return *this;}
 
         ~my_vector () {
