@@ -1,26 +1,27 @@
 // -----------
-// Vector3.c++
+// Vector5.c++
 // -----------
 
-#include <algorithm> // copy, equal, fill, swap
+#include <algorithm> // copy, equal, swap
 #include <cassert>   // assert
 #include <cstddef>   // size_t
 #include <iostream>  // cout, endl
 #include <iterator>  // ostream_iterator
+#include <memory>    // allocator
 #include <sstream>   // ostringstream
 #include <vector>    // vector
 
 using namespace std;
 
 int main () {
-    cout << "Vector3.c++" << endl;
+    cout << "Vector5.c++" << endl;
 
     {
     vector<int> x;
     }
 
     {
-    vector<int> x(3);
+    vector<int, allocator<int>> x(3);
     assert(x.size() == 3);
     assert(x[1] == 0);
     x[1] = 2;
@@ -28,7 +29,7 @@ int main () {
     }
 
     {
-    const vector<int> x(3, 4);
+    const vector<int> x(3, 4, allocator<int>());
     assert(x.size() == 3);
     assert(x[1] == 4);
     ostringstream out;

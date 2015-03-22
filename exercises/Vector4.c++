@@ -6,38 +6,41 @@
 #include <cassert>   // assert
 #include <cstddef>   // size_t
 #include <iostream>  // cout, endl
-#include <iterator>  // distance
+#include <iterator>  // ostream_iterator
+#include <sstream>   // ostringstream
+
+using namespace std;
 
 template <typename T>
 class my_vector {
     private:
-        T*          _a;
-        std::size_t _s;
+        size_t _s;
+        T*     _a;
 
     public:
-        my_vector (std::size_t s = 0, const T& v = T()) :
-                _a (s == 0 ? 0 : new T[s]),
-                _s (s) {
-            std::fill(begin(), end(), v);}
+        my_vector (size_t s = 0, const T& v = T()) :
+                _s (s),
+                _a (s == 0 ? 0 : new T[s]) {
+            fill(begin(), end(), v);}
 
         my_vector (const my_vector& rhs) :
-                _a (new T[rhs._s]),
-                _s (rhs._s) {
-            std::copy(rhs.begin(), rhs.end(), begin());}
+                _s (rhs._s),
+                _a (new T[rhs._s]) {
+            copy(rhs.begin(), rhs.end(), begin());}
 
         my_vector& operator = (my_vector rhs) {
-            std::swap(_a, rhs._a);
-            std::swap(_s, rhs._s);
+            swap(_s, rhs._s);
+            swap(_a, rhs._a);
             return *this;}
 
         ~my_vector () {
             delete [] _a;}
 
-       T& operator [] (std::size_t i) {
+       T& operator [] (size_t i) {
             return _a[i];}
 
-        const T& operator [] (std::size_t i) const {
-            return _a[i];}
+        const T& operator [] (size_t i) const {
+            return const_cast<my_vector<T>*>(this)->operator[](i);}
 
         T* begin () {
             return _a;}
@@ -51,12 +54,32 @@ class my_vector {
         const T* end () const {
             return const_cast<my_vector<T>*>(this)->end();}
 
-        std::size_t size () const {
+        size_t size () const {
             return _s;}};
 
 int main () {
-    using namespace std;
     cout << "Vector4.c++" << endl;
+
+    {
+    my_vector<int> x;
+    }
+
+    {
+    my_vector<int> x(3);
+    assert(x.size() == 3);
+    assert(x[1] == 0);
+    x[1] = 2;
+    assert(x[1] == 2);
+    }
+
+    {
+    const my_vector<int> x(3, 4);
+    assert(x.size() == 3);
+    assert(x[1] == 4);
+    ostringstream out;
+    copy(x.begin(), x.end(), ostream_iterator<int>(out));
+    assert(out.str() == "444");
+    }
 
     {
     const my_vector<int> x(10, 2);

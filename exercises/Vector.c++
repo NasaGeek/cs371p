@@ -2,14 +2,17 @@
 // Vector.c++
 // ----------
 
+#include <algorithm> // fill
 #include <cassert>   // assert
+#include <cstddef>   // size_t
 #include <iostream>  // cout, endl
 #include <iterator>  // ostream_iterator
 #include <sstream>   // ostringstream
 #include <vector>    // vector
 
+using namespace std;
+
 int main () {
-    using namespace std;
     cout << "Vector.c++" << endl;
 
     {
@@ -25,14 +28,12 @@ int main () {
     }
 
     {
-    vector<int> x(3, 4);
+    const vector<int> x(3, 4);
     assert(x.size() == 3);
     assert(x[1] == 4);
-    x[1] = 2;
-    assert(x[1] == 2);
     ostringstream out;
     copy(x.begin(), x.end(), ostream_iterator<int>(out));
-    assert(out.str() == "424");
+    assert(out.str() == "444");
     }
 
     cout << "Done." << endl;

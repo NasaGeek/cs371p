@@ -9,26 +9,28 @@
 #include <iterator>  // ostream_iterator
 #include <sstream>   // ostringstream
 
+using namespace std;
+
 template <typename T>
 class my_vector {
     private:
-        T* const          _a;
-        const std::size_t _s;
+        const size_t       _s;
+              T*     const _a;
 
     public:
-        my_vector (std::size_t s = 0, const T& v = T()) :
-                _a (s == 0 ? 0 : new T[s]),
-                _s (s) {
-            std::fill(begin(), end(), v);}
+        my_vector (size_t s = 0, const T& v = T()) :
+                _s (s),
+                _a (s == 0 ? 0 : new T[s]) {
+            fill(begin(), end(), v);}
 
         ~my_vector () {
             delete [] _a;}
 
-        T& operator [] (std::size_t i) {
+        T& operator [] (size_t i) {
             return _a[i];}
 
-        const T& operator [] (std::size_t i) const {
-            return _a[i];}
+        const T& operator [] (size_t i) const {
+            return const_cast<my_vector<T>*>(this)->operator[](i);}
 
         T* begin () {
             return _a;}
@@ -42,11 +44,10 @@ class my_vector {
         const T* end () const {
             return const_cast<my_vector<T>*>(this)->end();}
 
-        std::size_t size () const {
+        size_t size () const {
             return _s;}};
 
 int main () {
-    using namespace std;
     cout << "Vector2.c++" << endl;
 
     {
@@ -62,14 +63,12 @@ int main () {
     }
 
     {
-    my_vector<int> x(3, 4);
+    const my_vector<int> x(3, 4);
     assert(x.size() == 3);
     assert(x[1] == 4);
-    x[1] = 2;
-    assert(x[1] == 2);
     ostringstream out;
     copy(x.begin(), x.end(), ostream_iterator<int>(out));
-    assert(out.str() == "424");
+    assert(out.str() == "444");
     }
 
     cout << "Done." << endl;
