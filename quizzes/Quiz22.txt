@@ -1,0 +1,13 @@
+--
+CS371p: Quiz #22 (7 pts)
+--
+
+--------------------------------------------------------------------------
+ 1. In Project #3: Allocate, what should valid() check and what is its
+    complexity?
+    (6 pts)
+--
+
+that all sentinels match
+that there aren't two consecutive free blocks
+O(n)
