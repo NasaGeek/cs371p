@@ -1,6 +1,6 @@
-// -----------
-// Vector5.c++
-// -----------
+// -----------------
+// PolicyPattern.c++
+// -----------------
 
 #include <algorithm> // copy, equal, swap
 #include <cassert>   // assert
@@ -14,7 +14,7 @@
 using namespace std;
 
 int main () {
-    cout << "Vector5.c++" << endl;
+    cout << "PolicyPattern.c++" << endl;
 
     {
     vector<int> x;
