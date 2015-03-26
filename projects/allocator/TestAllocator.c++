@@ -1,5 +1,5 @@
 // ------------------------------------
-// projects/allocator/TestAllocator.c++
+// projects/allocator/TestAllocator1.c++
 // Copyright (C) 2015
 // Glenn P. Downing
 // ------------------------------------
@@ -15,12 +15,12 @@
 
 #include "Allocator.h"
 
-// -------------
-// TestAllocator
-// -------------
+// --------------
+// TestAllocator1
+// --------------
 
 template <typename A>
-struct TestAllocator : testing::Test {
+struct TestAllocator1 : testing::Test {
     // --------
     // typedefs
     // --------
@@ -33,19 +33,36 @@ struct TestAllocator : testing::Test {
 typedef testing::Types<
             std::allocator<int>,
             std::allocator<double>,
-            Allocator<int, 100>,
+            Allocator<int,    100>,
             Allocator<double, 100> >
-        my_types;
+        my_types_1;
 
-TYPED_TEST_CASE(TestAllocator, my_types);
+template <typename A>
+struct TestAllocator2 : testing::Test {
+    // --------
+    // typedefs
+    // --------
 
-TYPED_TEST(TestAllocator, One) {
+    typedef          A                  allocator_type;
+    typedef typename A::value_type      value_type;
+    typedef typename A::difference_type difference_type;
+    typedef typename A::pointer         pointer;};
+
+typedef testing::Types<
+            Allocator<int,    100>,
+            Allocator<double, 100> >
+        my_types_2;
+
+TYPED_TEST_CASE(TestAllocator1, my_types_1);
+TYPED_TEST_CASE(TestAllocator2, my_types_2);
+
+TYPED_TEST(TestAllocator1, One) {
     typedef typename TestFixture::allocator_type  allocator_type;
     typedef typename TestFixture::value_type      value_type;
     typedef typename TestFixture::difference_type difference_type;
     typedef typename TestFixture::pointer         pointer;
 
-    allocator_type x;
+          allocator_type  x;
     const difference_type s = 1;
     const value_type      v = 2;
     const pointer         p = x.allocate(s);
@@ -55,13 +72,25 @@ TYPED_TEST(TestAllocator, One) {
         x.destroy(p);
         x.deallocate(p, s);}}
 
-TYPED_TEST(TestAllocator, Ten) {
+TYPED_TEST(TestAllocator2, Onex) {
     typedef typename TestFixture::allocator_type  allocator_type;
     typedef typename TestFixture::value_type      value_type;
     typedef typename TestFixture::difference_type difference_type;
     typedef typename TestFixture::pointer         pointer;
 
-    allocator_type x;
+          allocator_type  x;
+    const difference_type s = 1;
+    const pointer         p = x.allocate(s);
+    ASSERT_EQ(0, 0);
+    }
+
+TYPED_TEST(TestAllocator1, Ten) {
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+
+          allocator_type  x;
     const difference_type s = 10;
     const value_type      v = 2;
     const pointer         b = x.allocate(s);

@@ -115,6 +115,7 @@ class Allocator {
         pointer allocate (size_type n) {
             // <your code>
             assert(valid());
+            std::cout << 0 << std::endl;
             return 0;}                   // replace!
 
         // ---------
