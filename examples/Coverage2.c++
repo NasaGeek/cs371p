@@ -30,7 +30,7 @@ int main () {
     return 0;}
 
 /*
-% g++-4.7 -fprofile-arcs -ftest-coverage -pedantic -std=c++11 -Wall Coverage1.c++ -o Coverage1 -lgtest -lgtest_main -pthread
+% g++ -fprofile-arcs -ftest-coverage -pedantic -std=c++11 -Wall Coverage1.c++ -o Coverage1 -lgtest -lgtest_main -pthread
 Coverage2
 Coverage2.c++
 Done.

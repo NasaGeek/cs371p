@@ -34,32 +34,29 @@ TEST(MyUnitTests, test_3) {
 /*
 % ls -al /usr/include/gtest/
 ...
--rw-r--r-- 1 root root 82450 Apr 15  2011 /usr/include/gtest/gtest.h
+-rw-r--r--   1 root root 82865 Mar 26 14:48 gtest.h
 ...
 
 
 
 % locate libgtest.a
-...
 /usr/lib/libgtest.a
-...
 
 
 
 % locate libgtest_main.a
-...
 /usr/lib/libgtest_main.a
-...
 
 
 
 % locate libpthread.a
 /usr/lib/x86_64-linux-gnu/libpthread.a
 /usr/lib32/libpthread.a
+/usr/libx32/libpthread.a
 
 
 
-% g++-4.7 -pedantic -std=c++11 -Wall UnitTests1.c++ -o UnitTests1 -lgtest -lgtest_main -pthread
+% g++ -pedantic -std=c++11 -Wall UnitTests1.c++ -o UnitTests1 -lgtest -lgtest_main -pthread
 
 
 
