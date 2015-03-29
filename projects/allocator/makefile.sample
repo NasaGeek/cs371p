@@ -7,11 +7,11 @@ Doxyfile:
 	doxygen -g
 
 TestAllocator: Allocator.h TestAllocator.c++
-	g++-4.7 -fprofile-arcs -ftest-coverage -pedantic -std=c++11 -Wall TestAllocator.c++ -o TestAllocator -lgtest -lgtest_main -lpthread
+	g++ -fprofile-arcs -ftest-coverage -pedantic -std=c++11 -Wall TestAllocator.c++ -o TestAllocator -lgtest -lgtest_main -lpthread
 
 TestAllocator.out: TestAllocator
-	valgrind TestAllocator        >  TestAllocator.out 2>&1
-	gcov-4.7 -b TestAllocator.c++ >> TestAllocator.out
+	valgrind TestAllocator     >  TestAllocator.out 2>&1
+	gcov -b  TestAllocator.c++ >> TestAllocator.out
 
 allocator-tests:
 	git clone https://github.com/cs371p-spring-2015/allocator-tests.git
@@ -34,6 +34,3 @@ clean:
 	rm -f *.gcov
 	rm -f TestAllocator
 	rm -f TestAllocator.out
-
-config:
-	git config -l
