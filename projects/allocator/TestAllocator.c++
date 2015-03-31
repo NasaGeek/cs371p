@@ -84,6 +84,10 @@ TYPED_TEST(TestAllocator1, Ten) {
             x.destroy(e);}
         x.deallocate(b, s);}}
 
+// --------------
+// TestAllocator2
+// --------------
+
 template <typename A>
 struct TestAllocator2 : testing::Test {
     // --------
