@@ -88,8 +88,20 @@ TYPED_TEST(TestAllocator1, Ten) {
 // TestAllocator2
 // --------------
 
+TEST(TestAllocator2, const_index) {
+    const Allocator<int, 100> x;
+    ASSERT_EQ(x[0], 0);}
+
+TEST(TestAllocator2, index) {
+    Allocator<int, 100> x;
+    ASSERT_EQ(x[0], 0);}
+
+// --------------
+// TestAllocator3
+// --------------
+
 template <typename A>
-struct TestAllocator2 : testing::Test {
+struct TestAllocator3 : testing::Test {
     // --------
     // typedefs
     // --------
@@ -104,9 +116,9 @@ typedef testing::Types<
             Allocator<double, 100> >
         my_types_2;
 
-TYPED_TEST_CASE(TestAllocator2, my_types_2);
+TYPED_TEST_CASE(TestAllocator3, my_types_2);
 
-TYPED_TEST(TestAllocator2, One) {
+TYPED_TEST(TestAllocator3, One) {
     typedef typename TestFixture::allocator_type  allocator_type;
     typedef typename TestFixture::value_type      value_type;
     typedef typename TestFixture::difference_type difference_type;
@@ -122,7 +134,7 @@ TYPED_TEST(TestAllocator2, One) {
         x.destroy(p);
         x.deallocate(p, s);}}
 
-TYPED_TEST(TestAllocator2, Ten) {
+TYPED_TEST(TestAllocator3, Ten) {
     typedef typename TestFixture::allocator_type  allocator_type;
     typedef typename TestFixture::value_type      value_type;
     typedef typename TestFixture::difference_type difference_type;

@@ -78,6 +78,7 @@ class Allocator {
          * O(1) in time
          * <your documentation>
          */
+        FRIEND_TEST(TestAllocator2, index);
         int& operator [] (int i) {
             return *reinterpret_cast<int*>(&a[i]);}
 
@@ -92,6 +93,10 @@ class Allocator {
          * throw a bad_alloc exception, if N is less than sizeof(T) + (2 * sizeof(int))
          */
         Allocator () {
+            a[0] = 0;         // replace!
+            a[1] = 0;
+            a[2] = 0;
+            a[3] = 0;
             // <your code>
             assert(valid());}
 
