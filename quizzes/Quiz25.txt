@@ -1,0 +1,32 @@
+--
+CS371p: Quiz #25 (7 pts)
+--
+
+--------------------------------------------------------------------------
+ 1. Describe ANY TWO of the FOUR circumstances that MUST use the MEMBER
+    INITIALIZATION LIST?
+    Be precise.
+    (2 pts)
+--
+
+a const member
+a reference member
+a user-defined member with no default constructor
+a base class with no default constructor
+
+--------------------------------------------------------------------------
+ 2. In the implementation of vector, what was the reason for adding an
+    allocator TEMPLATE argument?
+    (2 pts)
+--
+
+so that the user can specify their own allocator type
+
+--------------------------------------------------------------------------
+ 3. In the implementation of vector, what was the reason for adding an
+    allocator CONSTRUCTOR argument?
+    (2 pts)
+--
+
+so that the user can create an allocator object with a constructor other
+than the default constructor
