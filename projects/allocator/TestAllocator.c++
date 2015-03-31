@@ -66,7 +66,7 @@ TYPED_TEST(TestAllocator1, One) {
     const difference_type s = 1;
     const value_type      v = 2;
     const pointer         p = x.allocate(s);
-    if (p != 0) {
+    if (p != nullptr) {
         x.construct(p, v);
         ASSERT_EQ(v, *p);
         x.destroy(p);
@@ -80,9 +80,13 @@ TYPED_TEST(TestAllocator2, Onex) {
 
           allocator_type  x;
     const difference_type s = 1;
+    const value_type      v = 2;
     const pointer         p = x.allocate(s);
-    ASSERT_EQ(0, 0);
-    }
+    if (p != nullptr) {
+        x.construct(p, v);
+        ASSERT_EQ(v, *p);
+        x.destroy(p);
+        x.deallocate(p, s);}}
 
 TYPED_TEST(TestAllocator1, Ten) {
     typedef typename TestFixture::allocator_type  allocator_type;
@@ -94,7 +98,7 @@ TYPED_TEST(TestAllocator1, Ten) {
     const difference_type s = 10;
     const value_type      v = 2;
     const pointer         b = x.allocate(s);
-    if (b != 0) {
+    if (b != nullptr) {
         pointer e = b + s;
         pointer p = b;
         try {
