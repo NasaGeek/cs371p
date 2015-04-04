@@ -28,6 +28,14 @@ check:
 	@[ -e TestAllocator.c++                     ] && echo "TestAllocator.c++                     found" || echo "TestAllocator.c++                     NOT FOUND"
 	@[ -e TestAllocator.out                     ] && echo "TestAllocator.out                     found" || echo "TestAllocator.out                     NOT FOUND"
 
+check2:
+	@[ ! -d html ]
+	then
+		FOO := true
+	ifeq ($FOO, true)
+		exit
+	endif
+
 clean:
 	rm -f *.gcda
 	rm -f *.gcno
