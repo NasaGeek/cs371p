@@ -8,7 +8,7 @@
 #include <cassert>  // assert
 #include <iostream> // cout, endl
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 int cycle_length (int n) {
     assert(n > 0);
