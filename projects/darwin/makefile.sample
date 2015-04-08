@@ -10,7 +10,7 @@ RunDarwin: Darwin.h Darwin.c++ RunDarwin.c++
 	g++ -pedantic -std=c++11 -Wall Darwin.c++ RunDarwin.c++ -o RunDarwin
 
 RunDarwin.tmp: RunDarwin
-	RunDarwin < RunDarwin.in > RunDarwin.tmp
+	RunDarwin > RunDarwin.tmp
 	diff RunDarwin.tmp RunDarwin.out
 
 TestDarwin: Darwin.h Darwin.c++ TestDarwin.c++
